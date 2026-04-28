@@ -27,7 +27,7 @@ def model_2(t, y, k):
     
     Sd, IHd, S, I, C = y
 
-    k3, k4, w2, BHd, B, Sd, IHd = k
+    k3, k4, w2, BHd, B, Sd_ic, IHd_ic = k
 
     dy = np.zeros(5)
 
@@ -73,7 +73,7 @@ def curve_fitting_model2_last():
     tdata = data[:, 0].astype(int)
     qdata = data[:, 1]
 
-    k0 = k0 = np.array([
+    k0 = np.array([
     5e-6,   # k3
     8e-6,   # k4
     80,     # w2
@@ -104,7 +104,7 @@ def curve_fitting_model2_last():
     sol = solve_ivp(
         fun=lambda t, y: model_2(t, y, k),
         t_span=(tforward[0], tforward[-1]),
-        y0=[k[3], k[4], 65000, 0.00047, 0.00047],
+        y0=[k[5], k[6], 65000, 0.00047, 0.00047],
         t_eval=tforward,
         method="BDF",
         rtol=1e-8,
